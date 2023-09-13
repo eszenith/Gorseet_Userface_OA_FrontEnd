@@ -155,7 +155,7 @@ function setMobileButtons() {
         button.style.display = "none";
     }
 
-    if (gameContainer.clientWidth > 1000) {
+    if (gameContainer.clientWidth > 750) {
         unsetButton(leftButton);
         unsetButton(rightButton);
         unsetButton(downButton);
