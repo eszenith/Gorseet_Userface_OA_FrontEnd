@@ -37,7 +37,7 @@ function initBlocks(wordArray) {
         blocks[ind] = new Block(word);
         ind+=1;
     }
-    console.log(blocks);
+    //console.log(blocks);
 }
 
 // if player can use the current block this variable is true
@@ -185,7 +185,7 @@ function checkAndClearLine() {
                 stringRow += elementMap[i][j].innerHTML;
             }
         }
-        console.log("stringrow : "+stringRow);
+        //console.log("stringrow : "+stringRow);
         for(let line of lineClearConditions) {
             if(stringRow.includes(line)) {
                 makeGridFallAbove(clearLine);

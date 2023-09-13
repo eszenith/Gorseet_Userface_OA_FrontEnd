@@ -14,7 +14,7 @@ let displayHeight, displayWidth;
 
 //change grid size when loaded 
 function setGameSize() {
-    if(gameContainer.clientWidth > 800) {
+    if(gameContainer.clientWidth > 1000) {
         displayHeight = 24;
         displayWidth = 36;
     }

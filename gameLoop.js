@@ -35,7 +35,7 @@ let randomProperty = function (obj) {
         return val;
     }
     else if (sample_index < sample_words.length){
-        console.log("smapl : "+sample_index);
+        //console.log("smapl : "+sample_index);
         let val = [obj[sample_words[sample_index]]];
         sample_index +=1;
         return val;
@@ -155,7 +155,7 @@ function setMobileButtons() {
         button.style.display = "none";
     }
 
-    if (gameContainer.clientWidth > 800) {
+    if (gameContainer.clientWidth > 1000) {
         unsetButton(leftButton);
         unsetButton(rightButton);
         unsetButton(downButton);
