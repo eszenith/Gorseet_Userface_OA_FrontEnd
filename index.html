@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>tetris</title>
+  <link rel="stylesheet" href="displayStyles.css">
+</head>
+
+<body>
+  <div class="nav">
+    <span class="logo">Userfacet</span>
+    <span class="next word">Next word : <span class="nextBlock"></span></span>
+    <span class="score">SCORE <span class="score-span">0</span></span>
+  </div>
+  <div class="container">
+    <div class="display">
+
+    </div>
+  </div>
+  <div class="bottom">
+    <button class="btn button-restart" role="button">Restart</button>
+    <button class="btn btn-mobile button-left" role="button">L</button>
+    <button class="btn btn-mobile button-down" role="button">D</button>
+    <button class="btn btn-mobile button-right" role="button">R</button>
+    <button class="btn button-hint" role="button">Hint</button>
+    <span class="time">TIME <span class="time time-m"> </span> : <span class="time time-s"> </span> </span>
+  </div>
+  <br>
+
+  <div>
+    <h2><span class="gameOver"></span></h2>
+    <h3 class="info">Use Q W E to play the game  <span class="hint"></span></h3>
+  </div>
+  <script src="testScreen.js"></script>
+  <script src="display.js"></script>
+  <script src="tetris.js"></script>
+  <script src="gameLoop.js"></script>
+</body>
+
+</html>

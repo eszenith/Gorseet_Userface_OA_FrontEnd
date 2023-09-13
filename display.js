@@ -1,0 +1,161 @@
+"use strict";
+
+let elementMap = [], blockTemp = [], bitMap = [], rowSum = [];
+let topFilledRowInCol = [];
+
+const displyDiv = document.querySelector(".display");
+const gameOver = document.querySelector(".gameOver");
+const gameContainer = document.querySelector(".container");
+
+
+
+let gameOverFlag = false;
+let displayHeight, displayWidth;
+
+//change grid size when loaded 
+function setGameSize() {
+    if(gameContainer.clientWidth > 800) {
+        displayHeight = 24;
+        displayWidth = 36;
+    }
+    else {
+        displayHeight = 24;
+        displayWidth = 24;
+    }
+}
+setGameSize();
+
+clearBitMap();
+
+function clearBitMap() {
+    bitMap = [];
+    rowSum = [];
+    topFilledRowInCol = [];
+
+    for (let j = 0; j < displayWidth; j++) {
+        topFilledRowInCol.push(displayHeight);
+    }
+
+    for (let i = 0; i < displayHeight; i++) {
+        bitMap.push([])
+        rowSum.push(0);
+        for (let j = 0; j < displayWidth; j++) {
+            bitMap[i].push(0);
+        }
+    }
+}
+
+function createBlock() {
+    const block = document.createElement('div');
+    block.className = "block block-med";
+    return block;
+}
+
+function createBlockRow() {
+    const blockrow = document.createElement('div');
+    blockrow.className = "block-row";
+    return blockrow;
+}
+
+function getPixel(i, j) {
+    if (i >= displayHeight || j >= displayWidth) {
+        return true
+    }
+    else if (elementMap[i][j].classList.contains('block-on')) {
+        return true;
+    }
+    return false;
+}
+
+//sets or unsets the pixel at row i and column j to
+function togglePixel(i, j, classToAdd, value) {
+    if (i < displayHeight && j < displayWidth) {
+        elementMap[i][j].classList.toggle('block-on');
+        elementMap[i][j].classList.toggle(classToAdd);
+        //for setting the text value of pixel
+        if(elementMap[i][j].innerHTML === "")
+            elementMap[i][j].innerHTML = value;
+        else
+            elementMap[i][j].innerHTML = "";
+        return true;
+    }
+    return false;
+}
+
+function makeGridFallAbove(completeIndex) {
+
+    for (let i = completeIndex; i > 0; i--) {
+        for (let j = 0; j < displayWidth; j++) {
+            elementMap[i][j].classList = elementMap[i - 1][j].classList;
+            elementMap[i][j].innerHTML = elementMap[i - 1][j].innerHTML;
+            bitMap[i][j] = bitMap[i - 1][j];
+        }
+    }
+    for (let j = 0; j < displayWidth; j++) {
+        topFilledRowInCol[j] = topFilledRowInCol[j] + 1;
+    }
+
+
+}
+
+function setPixelOnGrid(i, j) {
+    try {
+        if (i < displayHeight && j < displayWidth) {
+            if (bitMap[i][j] == 1)
+                bitMap[i][j] = 0;
+            else
+                bitMap[i][j] = 1;
+
+            if (topFilledRowInCol[j] > i) {
+                topFilledRowInCol[j] = i;
+
+            }
+        }
+    }
+    catch (err) {
+        debugger;
+    }
+    rowSum[i] += 1;
+}
+
+function clearPixel(i, j) {
+    if (elementMap[i][j].classList.contains("block-on")) {
+        elementMap[i][j].classList.remove("block-on");
+    }
+}
+
+//create elementMap for display
+for (let i = 0; i < displayHeight; i++) {
+    blockTemp = [];
+    let blockrowElement = createBlockRow();
+
+    for (let j = 0; j < displayWidth; j++) {
+        let blockElement = createBlock();
+        blockrowElement.append(blockElement);
+        blockTemp.push(blockElement);
+    }
+    displyDiv.append(blockrowElement);
+    elementMap.push(blockTemp);
+}
+
+//clear the bitmap and elementmap for new game
+
+function clearBoardBitMap() {
+    clearBitMap();
+    displyDiv.innerHTML = "";
+    elementMap = [];
+
+    for (let i = 0; i < displayHeight; i++) {
+        blockTemp = [];
+        let blockrowElement = createBlockRow();
+
+        for (let j = 0; j < displayWidth; j++) {
+            let blockElement = createBlock();
+            blockrowElement.append(blockElement);
+            blockTemp.push(blockElement);
+        }
+        displyDiv.append(blockrowElement);
+        elementMap.push(blockTemp);
+    }
+    gameOver.innerHTML = ""
+}
